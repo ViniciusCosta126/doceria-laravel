@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Categoria extends Model
 {
     use HasFactory;
-
+    protected $fillable = ['nome'];
 
     public function doces(): HasMany
     {
