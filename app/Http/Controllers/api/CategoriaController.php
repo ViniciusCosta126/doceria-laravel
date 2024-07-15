@@ -5,11 +5,11 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoriaRequest;
 use App\Models\Categoria;
-use Exception;
-use Illuminate\Http\Request;
+
 
 class CategoriaController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
