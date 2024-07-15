@@ -22,7 +22,8 @@ class DoceController extends Controller
      */
     public function store(DoceRequest $request)
     {
-        $doce = Doce::create($request->all());
+        $validated = $request->validated();
+        $doce = Doce::create($validated);
         return response()->json($doce, 201);
     }
 
@@ -39,7 +40,8 @@ class DoceController extends Controller
      */
     public function update(DoceRequest $request, Doce $doce)
     {
-        $doce->fill($request->all());
+        $validated = $request->validated();
+        $doce->fill($validated);
         $doce->save();
         return response()->json($doce, 200);
     }

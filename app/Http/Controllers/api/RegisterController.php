@@ -15,13 +15,15 @@ class RegisterController extends Controller
 
     public function store(Request $request)
     {
-        $user = User::create($request->all());
+        $validated = $request->validated();
+        $user = User::create($validated);
         return response()->json($user, 201);
     }
 
     public function update(User $user, Request $request)
     {
-        $user->fill($request->all());
+        $validated = $request->validated();
+        $user->fill($validated);
         $user->save();
         return response()->json($user, 200);
     }
