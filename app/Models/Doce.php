@@ -11,9 +11,9 @@ class Doce extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['nome', 'preco', 'qtd_disponivel', 'tipo_qtd'];
 
-
-    public function categorias(): BelongsTo
+    public function categoria(): BelongsTo
     {
         return $this->belongsTo(Categoria::class);
     }

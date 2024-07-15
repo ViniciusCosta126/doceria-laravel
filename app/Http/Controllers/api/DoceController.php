@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DoceRequest;
+use App\Models\Doce;
 use Illuminate\Http\Request;
 
 class DoceController extends Controller
@@ -12,7 +14,7 @@ class DoceController extends Controller
      */
     public function index()
     {
-        //
+        return Doce::with('categoria')->get();
     }
 
     /**
@@ -26,9 +28,10 @@ class DoceController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DoceRequest $request)
     {
-        //
+        $doce = Doce::create($request->all());
+        return response()->json($doce, 201);
     }
 
     /**
@@ -50,16 +53,19 @@ class DoceController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(DoceRequest $request, Doce $doce)
     {
-        //
+        $doce->fill($request->all());
+        $doce->save();
+        return response()->json($doce, 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Doce $doce)
     {
-        //
+        $doce->delete();
+        return response()->json(null, 204);
     }
 }
