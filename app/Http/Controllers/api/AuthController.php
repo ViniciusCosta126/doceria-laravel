@@ -11,15 +11,16 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         if (Auth::attempt($request->only('email', 'password'))) {
+            $user = $request->user();
 
 
-            $token = $request->user()->createToken('token');
-
-            return response()->json(['message' => "Autorizado", 'token' => $token->plainTextToken], 200);
+            $token = $user->createToken('token');
+            return response()->json(['message' => "Autorizado", 'token' => $token->plainTextToken, 'user' => $user], 200);
         }
 
         return response()->json('Não autorizado', 401);
     }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
